@@ -191,7 +191,7 @@ output_paths = []
 # Initialize with the first image path
 
 result = x_path
-output_image_path = os.path.join(output_folder, f"output_image_0.png")
+output_image_path = os.path.join(output_folder, f"00000.png")
 
 #with open(output_image_path, "wb") as f:
    # f.write(result)
@@ -205,7 +205,7 @@ for i in range(1, len(y_paths)):
     result = send_request(last_image_path, optical_flow, y_paths[i])
     data = json.loads(result)
     encoded_image = data["images"][0]
-    output_image_path = os.path.join(output_folder, f"output_image_{i}.png")
+    output_image_path = os.path.join(output_folder, f"{str(i).rjust(5, '0')}.png")
     last_image_path = output_image_path
     with open(output_image_path, "wb") as f:
        f.write(base64.b64decode(encoded_image))
